@@ -119,6 +119,7 @@ class Dataset():
             dataset = (
                 dataset
                 .map(self.load_data, num_parallel_calls = self.AUTOTUNE)
+                .map(self.normalize, num_parallel_calls = self.AUTOTUNE)
                 .batch(self.batch_size)
                 .prefetch(self.AUTOTUNE)
             )
