@@ -15,7 +15,7 @@ class Dataset():
         
         return dm, cesm
     
-    def pad_to_square(self, image, laterality):
+    def pad_to_square(self, image, laterality=None):
     
         w,h=tf.shape(image)[1],tf.shape(image)[0]
         
@@ -32,15 +32,15 @@ class Dataset():
             
             ## in case laterality is not available
             
-            # left_zeros = tf.reduce_sum(tf.cast(image[:,:tf.shape(image)[1]//2] == 0, tf.int32))
-            # right_zeros = tf.reduce_sum(tf.cast(image[:,tf.shape(image)[1]//2:] == 0, tf.int32))
+            left_zeros = tf.reduce_sum(tf.cast(image[:,:tf.shape(image)[1]//2] == 0, tf.int32))
+            right_zeros = tf.reduce_sum(tf.cast(image[:,tf.shape(image)[1]//2:] == 0, tf.int32))
   
-            # if left_zeros < right_zeros:
-            #     pad_width=0
+            if left_zeros < right_zeros:
+                pad_width=0
             
             
-            if laterality == "L":
-                pad_width = 0
+            # if laterality == "L":
+            #     pad_width = 0
                 
             padded_image = tf.image.pad_to_bounding_box(
                 image,
@@ -61,27 +61,27 @@ class Dataset():
     @tf.function    
     def load_data(self, dm_path, cesm_path):
         
-        dm_laterality = tf.strings.split(dm_path,"@")[0]
-        dm_image_path = tf.strings.split(dm_path,"@")[1]
+        # dm_laterality = tf.strings.split(dm_path,"@")[0]
+        # dm_image_path = tf.strings.split(dm_path,"@")[1]
         
-        dm_image = tf.io.read_file(dm_image_path)
+        dm_image = tf.io.read_file(dm_path)
         dm_image = tf.image.decode_png(dm_image,channels=1)
         
         print(tf.shape(dm_image)[0])
         
-        dm_padded_image = self.pad_to_square(dm_image, dm_laterality)
+        dm_padded_image = self.pad_to_square(dm_image)
         
         dm_image = tf.cast(dm_padded_image, tf.float32)
         
         #######################################################
         
-        cesm_laterality = tf.strings.split(cesm_path,"@")[0]
-        cesm_image_path = tf.strings.split(cesm_path,"@")[1]
+        # cesm_laterality = tf.strings.split(cesm_path,"@")[0]
+        # cesm_image_path = tf.strings.split(cesm_path,"@")[1]
         
-        cesm_image = tf.io.read_file(cesm_image_path)
+        cesm_image = tf.io.read_file(cesm_path)
         cesm_image = tf.image.decode_png(cesm_image,channels=1)
         
-        cesm_padded_image = self.pad_to_square(cesm_image, cesm_laterality)
+        cesm_padded_image = self.pad_to_square(cesm_image)
         
         cesm_image = tf.cast(cesm_padded_image, tf.float32)
     
