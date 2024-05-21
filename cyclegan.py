@@ -388,10 +388,10 @@ def get_cyclegan_model():
     )
     
     cycle_gan_model.compile(
-        gen_G_optimizer=keras.optimizers.legacy.Adam(learning_rate=2e-4, beta_1=0.5),
-        gen_F_optimizer=keras.optimizers.legacy.Adam(learning_rate=2e-4, beta_1=0.5),
-        disc_X_optimizer=keras.optimizers.legacy.Adam(learning_rate=2e-4, beta_1=0.5),
-        disc_Y_optimizer=keras.optimizers.legacy.Adam(learning_rate=2e-4, beta_1=0.5),
+        gen_G_optimizer=keras.optimizers.Adam(learning_rate=2e-5, beta_1=0.5),
+        gen_F_optimizer=keras.optimizers.Adam(learning_rate=2e-5, beta_1=0.5),
+        disc_X_optimizer=keras.optimizers.Adam(learning_rate=2e-5, beta_1=0.5),
+        disc_Y_optimizer=keras.optimizers.Adam(learning_rate=2e-5, beta_1=0.5),
         gen_loss_fn=generator_loss_fn,
         disc_loss_fn=discriminator_loss_fn,
     )
