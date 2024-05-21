@@ -102,7 +102,7 @@ class Dataset():
         
         return dm, cesm
     
-    def form_dataset(self, X, y, train=True):
+    def create_dataset(self, X, y, train=True):
     
         dataset = tf.data.Dataset.from_tensor_slices((X,y))
         
