@@ -67,8 +67,6 @@ class Dataset():
         dm_image = tf.io.read_file(dm_path)
         dm_image = tf.image.decode_png(dm_image,channels=1)
         
-        print(tf.shape(dm_image)[0])
-        
         dm_padded_image = self.pad_to_square(dm_image)
         
         dm_image = tf.cast(dm_padded_image, tf.float32)
