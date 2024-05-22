@@ -16,13 +16,19 @@ train_ds = DS.create_dataset(dm_paths, cesm_paths)
 
 cyclegan_model = get_cyclegan_model()
 
-checkpoint_filepath = "cyclegan.weights.h5"
+cyclegan_model.built = True
+
+cyclegan_model.load_weights("./weights/cyclegan_pretrained.weights.h5")
+
+print("weights loaded")
+
+checkpoint_filepath = "cyclegan_continued.weights.h5"
 model_checkpoint_callback = keras.callbacks.ModelCheckpoint(
     filepath=checkpoint_filepath, save_weights_only=True
 )
 
 cyclegan_model.fit(
     train_ds,
-    epochs=100,
+    epochs=200,
     callbacks=[model_checkpoint_callback],
 )
