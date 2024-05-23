@@ -64,7 +64,7 @@ To train the model with your custom data, follow these steps:
 
       ```
       Ensure that each input image corresponds to its correct output image when the folders are sorted
-2. The file train.py gives an example of how you would train a CycleGan model on an example dataset.
-3. Thefile continue_train.py gives an example of fine tuning a model using saved weights.
+2. The file [train.py](train.py) gives an example of how you would train a CycleGan model on an example dataset.
+3. Thefile [continue_train.py](train.py) gives an example of fine tuning a model using saved weights.
 
    
