@@ -10,7 +10,8 @@ CESM from DM images.
 
 - [Installation](#installation)
 - [Usage](#usage)
-  - [Training/finetuning with Custom Data] (#training/finetuning_with_Custom_Data)
+- [Training/finetuning with Custom Data](#trainingfinetuning-with-custom-data)
+
  
 
 
