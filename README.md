@@ -44,6 +44,16 @@ CESM from DM images.
     pip install -r requirements.txt
     ```
 
+6. Start training:
+    - Train from scratch:
+        ```sh
+        python train.py
+        ```
+    - Continue training on pre-trained weights:
+        ```sh
+        python continue_train.py
+        ```
+
 ## Usage
 
 ### Training/finetuning with Custom Data
