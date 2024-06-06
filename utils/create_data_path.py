@@ -14,8 +14,12 @@ def modify_filename(filename):
     # Split the filename on underscores
     parts = filename.split('_')
     
-    # Modify the last part by replacing 'C' with 'MG'
-    parts[-1] = parts[-1].replace('C', 'MG')
+    # Check if the last part contains 'C'
+    if 'C' in parts[-1]:
+        # Modify the last part by replacing 'C' with 'MG'
+        parts[-1] = parts[-1].replace('C', 'MG')
+    else:
+        parts[-2] = parts[-2].replace('C', 'MG')
     
     # Join the parts back together with underscores
     new_filename = '_'.join(parts)
