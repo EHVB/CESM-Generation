@@ -64,7 +64,7 @@ def pad_to_square(image, laterality=None):
 
 def random_crop( dm, cesm):
     stacked = tf.stack([dm,cesm], axis=0)
-    cropped_image = tf.image.random_crop(stacked, size=[2, self.image_size, self.image_size, self.n_channels])
+    cropped_image = tf.image.random_crop(stacked, size=[2, 256, 256, 1])
     
     return cropped_image[0], cropped_image[1]
 
@@ -102,7 +102,7 @@ def random_jitter(dm, cesm):
     cesm = tf.image.resize(cesm, [286,286])
     cesm = (cesm / 127.5) - 1.0
     
-    dm, cesm = self.random_crop(dm, cesm)
+    dm, cesm =random_crop(dm, cesm)
     
     if tf.random.uniform(()) > 0.5:
         dm = tf.image.flip_left_right(dm)
