@@ -17,15 +17,15 @@ def generate_images(model, dataloader, number_of_samples=5):
         plt.imshow(display_list[i]*0.5 +0.5 , cmap="gray")
 
     if not os.path.exists('/sampleimages'):
-        os.makedirs('/sampleimages')
+        os.makedirs('./sampleimages')
         print(f"Directory '{'/sampleimages'}' created.")
     else:
         print(f"Directory '{'/sampleimages'}' already exists.")
 
 
     # Save the figure with a filename based on the sample number
-    plt.savefig(f'/sampleimages/sample_plot_{sample_num}.png')
-    print(f"save sample{sample_num}")
+    plt.savefig(f'./sampleimages/sample_plot_{sample_num}.png')
+    print(f"saved sample{sample_num}")
     plt.close()  # Close the figure to avoid memory issues
     sample_num+=1
   
