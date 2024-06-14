@@ -4,7 +4,12 @@ import os
 def generate_images(model, dataloader, number_of_samples=5):
   
   for sample_num, (test_input, target) in enumerate(dataloader.take(number_of_samples)):
-    prediction = model(test_input, training=False)  
+    prediction = model(test_input, training=False) 
+    print(type(test_input)) 
+    print(type(target))
+    print(type(model))
+    
+
     plt.figure(figsize=(15, 15))
     display_list = [test_input[0], target[0], prediction[0]]
     title = ['Input Image', 'Ground Truth', 'Predicted Image']

@@ -9,7 +9,7 @@ from utils.generate_image import generate_images
 dm_dir = r"./CDD-CESM/Low energy images of CDD-CESM" # Replace with path of digital mammo directory
 cesm_dir = r"./CDD-CESM/Subtracted images of CDD-CESM" # Replace with path of contrast mammo directory
 
-dm_paths, cesm_paths = create_data_path_old(dm_dir, cesm_dir)
+dm_paths, cesm_paths = create_data_path(dm_dir, cesm_dir)
 
 
 
@@ -20,7 +20,7 @@ cyclegan_model = get_cyclegan_model()
 
 cyclegan_model.built = True
 
-cyclegan_model.load_weights("./weights/cyclegan_pretrained.weights.h5")
+cyclegan_model.load_weights("./weights/cyclegan_pretrained.weights.h5") # path to new model weights 
 
 # generate 20 sample images 
 
