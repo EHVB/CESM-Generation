@@ -16,7 +16,7 @@ def generate_images(model, dataloader, number_of_samples=5):
         # Getting the pixel values in the [0, 1] range to plot.
         plt.imshow(display_list[i]*0.5 +0.5 , cmap="gray")
 
-    if not os.path.exists('/sampleimages'):
+    if not os.path.exists('./sampleimages'):
         os.makedirs('./sampleimages')
         print(f"Directory '{'/sampleimages'}' created.")
     else:
