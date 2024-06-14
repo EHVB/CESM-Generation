@@ -25,4 +25,4 @@ cyclegan_model.built = True
 cyclegan_model.load_weights("./weights/cyclegan_pretrained.weights.h5") # path to new model weights 
 
 # generate 20 sample images 
-#generate_images(cyclegan_model.gen_G,train_ds,20)
+generate_images(cyclegan_model.gen_G,train_ds,20)
