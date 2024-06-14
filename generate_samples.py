@@ -19,13 +19,13 @@ dm_paths, cesm_paths = create_data_path_old(dm_dir, cesm_dir)
 #DS = Dataset()
 #train_ds = DS.create_dataset(dm_paths, cesm_paths)
 
-def normalize(self, dm, cesm):
+def normalize(dm, cesm):
     dm = (dm / 127.5) - 1.0
     cesm = (cesm / 127.5) - 1.0
     
     return dm, cesm
 
-def pad_to_square(self, image, laterality=None):
+def pad_to_square(image, laterality=None):
 
     w,h=tf.shape(image)[1],tf.shape(image)[0]
     
@@ -62,14 +62,14 @@ def pad_to_square(self, image, laterality=None):
         
     return padded_image 
 
-def random_crop(self, dm, cesm):
+def random_crop( dm, cesm):
     stacked = tf.stack([dm,cesm], axis=0)
     cropped_image = tf.image.random_crop(stacked, size=[2, self.image_size, self.image_size, self.n_channels])
     
     return cropped_image[0], cropped_image[1]
 
 @tf.function    
-def load_data(self, dm_path, cesm_path):
+def load_data( dm_path, cesm_path):
     
     # dm_laterality = tf.strings.split(dm_path,"@")[0]
     # dm_image_path = tf.strings.split(dm_path,"@")[1]
@@ -77,7 +77,7 @@ def load_data(self, dm_path, cesm_path):
     dm_image = tf.io.read_file(dm_path)
     dm_image = tf.image.decode_png(dm_image,channels=1)
     
-    dm_padded_image = self.pad_to_square(dm_image)
+    dm_padded_image = pad_to_square(dm_image)
     
     dm_image = tf.cast(dm_padded_image, tf.float32)
     
@@ -89,7 +89,7 @@ def load_data(self, dm_path, cesm_path):
     cesm_image = tf.io.read_file(cesm_path)
     cesm_image = tf.image.decode_png(cesm_image,channels=1)
     
-    cesm_padded_image = self.pad_to_square(cesm_image)
+    cesm_padded_image = pad_to_square(cesm_image)
     
     cesm_image = tf.cast(cesm_padded_image, tf.float32)
 
@@ -112,14 +112,19 @@ def random_jitter(self, dm, cesm):
 
 dataset = tf.data.Dataset.from_tensor_slices((dm_paths,cesm_paths))
 
-dataset = (
-                dataset
-                .shuffle(len(dataset))
-                .map(load_data, num_parallel_calls = tf.data.AUTOTUNE)
-                .map(random_jitter, num_parallel_calls=tf.data.AUTOTUNE)
-                .batch(1)
-                .prefetch(tf.AUTOTUNE)
-            )
+dataset = dataset.map(load_data, num_parallel_calls=tf.data.AUTOTUNE)
+
+
+dataset = dataset.map(random_jitter, num_parallel_calls=tf.data.AUTOTUNE)
+
+
+dataset = dataset.batch(batch_size=1)
+
+
+
+
+
+
 
 
 cyclegan_model = get_cyclegan_model()
