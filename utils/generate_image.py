@@ -2,8 +2,8 @@ import matplotlib.pyplot as plt
 import os 
 
 def generate_images(model, dataloader, number_of_samples=5):
-  
-  for sample_num, (test_input, target) in enumerate(dataloader.take(number_of_samples)):
+  sample_num=0
+  for (test_input, target) in dataloader.take(number_of_samples):
     prediction = model(test_input, training=False) 
     print(type(test_input)) 
     print(type(target))
@@ -31,4 +31,5 @@ def generate_images(model, dataloader, number_of_samples=5):
     plt.savefig(f'/sampleimages/sample_plot_{sample_num}.png')
     print(f"save sample{sample_num}")
     plt.close()  # Close the figure to avoid memory issues
+    sample_num+=1
   
