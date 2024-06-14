@@ -96,7 +96,7 @@ def load_data( dm_path, cesm_path):
     return (dm_image, cesm_image)
 
 @tf.function
-def random_jitter(self, dm, cesm):
+def random_jitter(dm, cesm):
     dm = tf.image.resize(dm, [286,286])
     dm = (dm / 127.5) - 1.0
     cesm = tf.image.resize(cesm, [286,286])
