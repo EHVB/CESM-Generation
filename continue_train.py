@@ -29,6 +29,6 @@ model_checkpoint_callback = keras.callbacks.ModelCheckpoint(
 
 cyclegan_model.fit(
     train_ds,
-    epochs=200,
+    epochs=1,
     callbacks=[model_checkpoint_callback],
 )
