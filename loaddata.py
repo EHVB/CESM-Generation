@@ -8,6 +8,11 @@ import matplotlib.pyplot as plt
 import os
 import tensorflow as tf
 
+import tensorflow_datasets as tfds
+
+print(tfds.__version__)
+
+
 
 dm_dir = r"./CDD-CESM/Low energy images of CDD-CESM" # Replace with path of digital mammo directory
 cesm_dir = r"./CDD-CESM/Subtracted images of CDD-CESM" # Replace with path of contrast mammo directory
@@ -24,3 +29,5 @@ cyclegan_model = get_cyclegan_model()
 cyclegan_model.built = True
 
 cyclegan_model.load_weights("./weights/cyclegan_pretrained.weights.h5") # path to new model weights 
+print(tf.__version__)
+

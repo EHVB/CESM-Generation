@@ -5,10 +5,6 @@ def generate_images(model, dataloader, number_of_samples=5):
   sample_num=0
   for (test_input, target) in dataloader.take(number_of_samples):
     prediction = model(test_input, training=False) 
-    print(type(test_input)) 
-    print(type(target))
-    print(type(model))
-    print(type(    prediction  ))
 
     plt.figure(figsize=(15, 15))
     display_list = [test_input[0], target[0], prediction[0]]
