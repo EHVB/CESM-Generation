@@ -8,7 +8,7 @@ def generate_images(model, dataloader, number_of_samples=5):
     print(type(test_input)) 
     print(type(target))
     print(type(model))
-    
+    print(type(    prediction = model(test_input, training=False) ))
 
     plt.figure(figsize=(15, 15))
     display_list = [test_input[0], target[0], prediction[0]]
@@ -29,5 +29,6 @@ def generate_images(model, dataloader, number_of_samples=5):
 
     # Save the figure with a filename based on the sample number
     plt.savefig(f'/sampleimages/sample_plot_{sample_num}.png')
+    print(f"save sample{sample_num}")
     plt.close()  # Close the figure to avoid memory issues
   
