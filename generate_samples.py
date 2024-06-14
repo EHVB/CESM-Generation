@@ -4,7 +4,8 @@ from data.dataset import Dataset
 import keras
 from utils.create_data_path import create_data_path_old
 from utils.generate_image import generate_images
-import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt 
+import os
 
 
 dm_dir = r"./CDD-CESM/Low energy images of CDD-CESM" # Replace with path of digital mammo directory
