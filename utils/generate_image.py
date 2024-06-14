@@ -2,7 +2,8 @@ import matplotlib.pyplot as plt
 import os
 
 def generate_images(model, dataloader, number_of_samples=5):
-    sample_num = 0
+    batch_data=dataloader.batch(number_of_samples)
+    batch_data.as_numpy_iterator()
 
     for test_input, target in dataloader:
         if sample_num >= number_of_samples:
