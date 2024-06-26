@@ -4,23 +4,20 @@ from models.cyclegan import get_cyclegan_model
 from data.dataset import Dataset
 import keras
 
-dm_dir = r"/kaggle/input/pix2pix-output/train/trainA" # Replace with path of digital mammo directory
-cesm_dir = r"/kaggle/input/pix2pix-output/train/trainB" # Replace with path of contrast mammo directory
+dm_dir = r"/kaggle/input/pix2pix-output/train/testA" # Replace with path of digital mammo directory
+cesm_dir = r"/kaggle/input/pix2pix-output/train/testB" # Replace with path of contrast mammo directory
 
 dm_paths, cesm_paths = create_data_path_old(dm_dir, cesm_dir)
 
-print(dm_paths[123])
-print(cesm_paths[123])
-
 
 DS = Dataset()
-train_ds = DS.create_dataset(dm_paths, cesm_paths)
+test_ds = DS.create_dataset(dm_paths, cesm_paths,train=False)
 
 cyclegan_model = get_cyclegan_model()
 
 cyclegan_model.built = True
 
-cyclegan_model.load_weights("./weights/cyclegan_trained.weights.h5")
+cyclegan_model.load_weights("./cyclegan_tuned.weights.h5")
 
 
-generate_images(cyclegan_model.gen_G,train_ds,20)
+generate_images(cyclegan_model.gen_G,test_ds,100)
